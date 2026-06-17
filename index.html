@@ -1,0 +1,1496 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lima Marathon | Pacotes Maturo Viagens</title>
+  <link rel="icon" type="image/x-icon" href="media/maturo_logo_rgb.ico">
+  <meta name="description" content="Landing page de pacotes para correr a Lima Marathon, com roteiros para atletas e acompanhantes em Lima, Peru.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f7f6ee;
+      --muted: #b8c5c6;
+      --coal: #07100f;
+      --panel: rgba(7, 16, 15, .86);
+      --line: rgba(255, 255, 255, .16);
+      --gold: #f4bd21;
+      --sky: #46c2e7;
+      --lime: #a5d344;
+      --terra: #d45c30;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .4);
+      --radius: 8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--coal);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .page {
+      min-height: 100vh;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(7, 16, 15, .2), #07100f 72%),
+        radial-gradient(circle at 14% 52%, rgba(212, 92, 48, .2), transparent 24%),
+        radial-gradient(circle at 88% 16%, rgba(70, 194, 231, .18), transparent 26%);
+    }
+
+    .hero {
+      min-height: 92vh;
+      position: relative;
+      display: grid;
+      align-items: end;
+      isolation: isolate;
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(2, 7, 7, .96) 0%, rgba(2, 7, 7, .75) 42%, rgba(2, 7, 7, .08) 100%),
+        linear-gradient(0deg, #07100f 0%, rgba(7, 16, 15, .02) 38%),
+        url("media/lima_4d3n.png") 58% center / cover no-repeat;
+      filter: saturate(1.08) contrast(1.02) brightness(.82);
+      transform: scale(1.035);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 100% 82px;
+      opacity: .24;
+      mask-image: linear-gradient(90deg, #000, transparent 74%);
+    }
+
+    .nav {
+      position: absolute;
+      top: 0;
+      left: 5em;
+      right: 5em;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px clamp(20px, 5vw, 72px);
+      padding-top: 50px;
+
+    }
+
+    .brand {
+      display: inline-grid;
+      align-items: center;
+      justify-items: center;
+      gap: 6px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .race-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 152px;
+      height: 42px;
+      object-fit: cover;
+      object-position: center 54%;
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,.32));
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      color: var(--gold);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), 0 10px 24px rgba(0,0,0,.28);
+    }
+
+    .brand-text {
+      display: grid;
+      gap: 0;
+      line-height: 1;
+    }
+
+    .brand-text small {
+      color: rgba(255,255,255,.68);
+      font-size: .68rem;
+      font-weight: 850;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,.84);
+    }
+
+    .cta,
+    .ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 999px;
+      font-weight: 850;
+      white-space: nowrap;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .cta {
+      border: 1px solid rgba(255,255,255,.2);
+      color: #07100f;
+      background: var(--gold);
+      box-shadow: 0 18px 42px rgba(244, 189, 33, .22);
+    }
+
+    .cta:hover,
+    .ghost:hover {
+      transform: translateY(-2px);
+    }
+
+    .cta:hover {
+      box-shadow: 0 24px 58px rgba(244, 189, 33, .3);
+    }
+
+    .ghost {
+      border: 1px solid rgba(255,255,255,.24);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.92);
+      backdrop-filter: blur(14px);
+    }
+
+    .ghost:hover {
+      border-color: rgba(255,255,255,.38);
+    }
+
+    .hero-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: 100px 0 64px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #dff7ff;
+      font-size: .83rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--sky), var(--lime));
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(3.4rem, 8.6vw, 8.8rem);
+      line-height: .84;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+
+    .hero-copy {
+      max-width: 690px;
+      margin: 24px 0 0;
+      color: rgba(255,255,255,.84);
+      font-size: clamp(1.04rem, 1.7vw, 1.28rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .proof-strip {
+      width: min(1180px, calc(100% - 48px));
+      margin: -28px auto 0;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--line);
+      background: rgba(7, 16, 15, .94);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .proof {
+      padding: 22px;
+      border-right: 1px solid var(--line);
+    }
+
+    .proof:last-child { border-right: 0; }
+
+    .proof b {
+      display: block;
+      font-size: clamp(1.28rem, 2.4vw, 2.08rem);
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .proof span {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: .82rem;
+      text-transform: uppercase;
+      font-weight: 850;
+    }
+
+    section {
+      padding: clamp(64px, 8vw, 108px) 24px;
+    }
+
+    .wrap {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      min-width: 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 32px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 4.55rem);
+      line-height: .94;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      text-wrap: balance;
+      overflow-wrap: anywhere;
+    }
+
+    .section-head p,
+    .lead {
+      margin: 0;
+      max-width: 540px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .routes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .route {
+      min-height: 240px;
+      display: grid;
+      align-content: end;
+      gap: 10px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.028)),
+        rgba(255,255,255,.04);
+      box-shadow: 0 18px 42px rgba(0,0,0,.22);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .route::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 4px;
+      background: var(--accent, var(--gold));
+    }
+
+    .route strong {
+      font-size: clamp(2.3rem, 5vw, 4.2rem);
+      line-height: .86;
+      color: var(--accent, var(--gold));
+    }
+
+    .route h3,
+    .control-panel h3,
+    .trip-copy h3,
+    .timeline h3 {
+      margin: 0;
+      font-size: 1.08rem;
+      text-transform: uppercase;
+    }
+
+    .route p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .trip-configurator {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .control-panel,
+    .trip-detail {
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025)),
+        rgba(7, 16, 15, .9);
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+
+    .control-panel {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .control-panel h3 {
+      grid-column: 1 / -1;
+    }
+
+    .toggle-group.primary {
+      grid-column: span 3;
+    }
+
+    .toggle-group.filter {
+      grid-column: span 2;
+    }
+
+    .toggle-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    .toggle-label {
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+      padding: 5px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+    }
+
+    .segmented.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .segmented button {
+      min-height: 40px;
+      padding: 0 8px;
+      border: 0;
+      border-radius: 999px;
+      color: rgba(255,255,255,.74);
+      background: transparent;
+      font-weight: 850;
+      cursor: pointer;
+      overflow-wrap: anywhere;
+    }
+
+    .segmented button[aria-pressed="true"] {
+      color: #07100f;
+      background: #dff7ff;
+    }
+
+    .selection-summary {
+      grid-column: 1 / -1;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .selection-summary strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 1.05rem;
+    }
+
+    .trip-detail {
+      overflow: hidden;
+    }
+
+    .trip-hero {
+      position: relative;
+      min-height: 390px;
+      display: grid;
+      align-items: end;
+      padding: 28px;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    .trip-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: var(--image) center / cover no-repeat;
+      filter: saturate(1.08);
+      transition: transform .45s ease;
+    }
+
+    .trip-detail:hover .trip-hero::before {
+      transform: scale(1.025);
+    }
+
+    .trip-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(0deg, rgba(4,10,10,.96) 0%, rgba(4,10,10,.76) 42%, rgba(4,10,10,.16) 100%),
+        linear-gradient(90deg, rgba(4,10,10,.84), rgba(4,10,10,.2));
+    }
+
+    .trip-title {
+      max-width: 780px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.88);
+      font-size: .76rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .trip-title h3 {
+      margin: 0;
+      font-size: clamp(2.3rem, 5.2vw, 5rem);
+      line-height: .9;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+
+    .trip-title p {
+      max-width: 640px;
+      margin: 14px 0 0;
+      color: rgba(255,255,255,.82);
+    }
+
+    .trip-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, .42fr);
+      gap: 22px;
+      padding: 28px;
+    }
+
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .fact {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.045);
+    }
+
+    .fact small {
+      display: block;
+      color: var(--muted);
+      font-size: .68rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .fact strong {
+      display: block;
+      margin-top: 3px;
+      font-size: 1.02rem;
+    }
+
+    .trip-copy p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px 18px;
+      margin-top: 18px;
+    }
+
+    .included-grid span {
+      display: flex;
+      gap: 9px;
+      color: rgba(255,255,255,.86);
+      font-weight: 650;
+    }
+
+    .included-grid span::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      flex: 0 0 7px;
+      margin-top: 8px;
+      border-radius: 50%;
+      background: var(--accent, var(--gold));
+    }
+
+    .commercial-card {
+      align-self: start;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.1), rgba(255,255,255,.035)),
+        rgba(5, 12, 12, .9);
+      padding: 22px;
+      container-type: inline-size;
+      min-width: 0;
+    }
+
+    .commercial-card small {
+      display: block;
+      color: var(--muted);
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .commercial-card .price {
+      margin-top: 8px;
+      font-size: clamp(2.2rem, 15cqw, 4rem);
+    }
+
+    .rate-line,
+    .rate-message,
+    .usd-line {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: .88rem;
+      font-weight: 650;
+    }
+
+    .rate-message {
+      color: #dff7ff;
+    }
+
+    .rate-message.error {
+      color: #ffb08a;
+    }
+
+    .price {
+      display: flex;
+      align-items: end;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 4px 0 8px;
+      font-size: clamp(2.6rem, 5.4vw, 5.2rem);
+      line-height: .9;
+      font-weight: 950;
+      color: var(--accent, var(--gold));
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .price output {
+      min-width: 0;
+      max-width: 100%;
+      white-space: nowrap;
+    }
+
+    .price span {
+      color: var(--ink);
+      font-size: 1.04rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .commercial-meta {
+      display: grid;
+      gap: 8px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .commercial-meta b { color: var(--ink); }
+
+    details.itinerary {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+    }
+
+    details.itinerary summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      cursor: pointer;
+      list-style: none;
+      color: var(--ink);
+      font-size: 1.15rem;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    details.itinerary summary::-webkit-details-marker { display: none; }
+
+    details.itinerary summary::after {
+      content: "+";
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--accent, var(--gold));
+      font-size: 1.25rem;
+    }
+
+    details.itinerary[open] summary::after { content: "-"; }
+
+    .day-list {
+      display: grid;
+      gap: 14px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .day-list li {
+      display: grid;
+      grid-template-columns: 62px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .day-list time {
+      color: var(--accent, var(--gold));
+      font-weight: 950;
+    }
+
+    .day-list b { display: block; }
+
+    .day-list span { color: var(--muted); }
+
+    .story {
+      position: relative;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .story-image {
+      min-height: 620px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #10201f;
+    }
+
+    .story-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .story-copy {
+      display: grid;
+      align-content: center;
+      gap: 24px;
+      padding: clamp(20px, 4vw, 44px);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .story-copy p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .highlight {
+      min-height: 128px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.045);
+    }
+
+    .highlight b {
+      display: block;
+      color: var(--ink);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .highlight span {
+      color: var(--muted);
+    }
+
+    .closing {
+      padding-bottom: 46px;
+    }
+
+    .closing-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      padding: clamp(26px, 5vw, 54px);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(120deg, rgba(244, 189, 33, .18), transparent 32%),
+        linear-gradient(300deg, rgba(70, 194, 231, .22), transparent 42%),
+        rgba(7, 16, 15, .94);
+      box-shadow: var(--shadow);
+    }
+
+    .closing-card h2 { max-width: 780px; }
+
+    .contact-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 24px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-weight: 750;
+    }
+
+    footer {
+      padding: 0 24px 32px;
+      color: rgba(255,255,255,.52);
+      font-size: .84rem;
+    }
+
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+    }
+
+    @media (max-width: 920px) {
+      .nav-links { display: none; }
+
+      .proof-strip,
+      .routes,
+      .control-panel,
+      .trip-body,
+      .story-grid,
+      .closing-card {
+        grid-template-columns: 1fr;
+      }
+
+      .proof {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .proof:last-child { border-bottom: 0; }
+
+      .section-head { display: grid; }
+
+      .story-image { min-height: 520px; }
+    }
+
+    @media (max-width: 620px) {
+      .hero {
+        min-height: 88vh;
+        padding: 18px;
+      }
+
+      .hero::before {
+        background-position: 44% center;
+      }
+
+      .nav {
+        padding: 16px 18px;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+      }
+
+      .brand-text {
+        font-size: .86rem;
+      }
+
+      .nav .cta {
+        display: none;
+      }
+
+      h1 {
+        font-size: clamp(2.72rem, 13vw, 3.7rem);
+      }
+
+      h2 {
+        font-size: clamp(1.85rem, 10vw, 2.7rem);
+      }
+
+      .hero-actions a {
+        width: 100%;
+      }
+
+      .proof-strip {
+        width: calc(100% - 32px);
+      }
+
+      section {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .control-panel,
+      .trip-body,
+      .trip-hero,
+      .commercial-card,
+      .route,
+      .story-copy,
+      .closing-card {
+        padding: 20px;
+      }
+
+      .trip-hero {
+        min-height: 330px;
+      }
+
+      .fact-grid,
+      .included-grid,
+      .highlights {
+        grid-template-columns: 1fr;
+      }
+
+      .story-image {
+        min-height: 460px;
+      }
+
+      footer .wrap {
+        display: grid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero" id="topo">
+      <nav class="nav" aria-label="Navegação principal">
+        <a class="brand" href="#topo" aria-label="Lima Marathon">
+          <span class="race-lockup">
+            <span class="brand-mark">42K</span>
+            <span class="brand-text">
+              Lima Marathon
+            </span>
+          </span>
+          <img class="brand-logo" src="media/maturo_logo_rgb.png" alt="Maturo Viagens e Turismo">
+        </a>
+        <div class="nav-links">
+          <a href="#distancias">Distâncias</a>
+          <a href="#pacotes">Pacotes</a>
+          <a id="roteiro-link" href="#roteiro">Roteiro</a>
+          <a href="#contato">Contato</a>
+        </div>
+        <a class="cta" href="https://wa.me/5511919523477?text=Quero%20saber%20mais%20sobre%20os%20pacotes%20Lima%20Marathon" target="_blank" rel="noreferrer">Falar no WhatsApp</a>
+      </nav>
+
+      <div class="hero-inner">
+        <p class="eyebrow">Lima, Peru - costa, cidade e legado</p>
+        <h1>Lima Marathon</h1>
+        <p class="hero-copy">Pacotes para correr uma das provas mais vibrantes da América do Sul, com logística para atletas, hospedagem selecionada e experiências que atravessam a Costa Verde, Miraflores e a energia histórica do Peru.</p>
+        <div class="hero-actions">
+          <a class="cta" href="#pacotes">Ver pacotes</a>
+          <a class="ghost" href="#distancias">Explorar a prova</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="proof-strip" aria-label="Resumo da experiência">
+      <div class="proof"><b>10K 21K 42K</b><span>Distâncias da prova</span></div>
+      <div class="proof"><b>4D/3N ou 8D/7N</b><span>Viagens curta e estendida</span></div>
+      <div class="proof"><b>Costa Verde</b><span>Rota com vista para o Pacífico</span></div>
+      <div class="proof"><b>Lima + Andes</b><span>Extensão opcional ao Peru clássico</span></div>
+    </div>
+
+    <section id="distancias">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Escolha seu ritmo</h2>
+          <p>Uma viagem desenhada para corredores de diferentes objetivos: prova rápida, meia maratona com cenário costeiro ou os 42K completos pela capital peruana.</p>
+        </div>
+        <div class="routes">
+          <article class="route" style="--accent: var(--sky);">
+            <strong>10K</strong>
+            <h3>Entrada vibrante</h3>
+            <p>Ideal para acompanhantes, estreantes e quem quer sentir o clima da prova com uma distância mais leve.</p>
+          </article>
+          <article class="route" style="--accent: var(--gold);">
+            <strong>21K</strong>
+            <h3>Meia com vista</h3>
+            <p>O equilíbrio entre desafio e viagem: ritmo forte, mar, falésias e chegada com energia de grande evento.</p>
+          </article>
+          <article class="route" style="--accent: var(--lime);">
+            <strong>42K</strong>
+            <h3>Maratona completa</h3>
+            <p>A jornada inteira por Lima, para quem quer transformar a capital peruana em medalha e memória.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pacotes">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Pacotes</h2>
+          <p>Monte a experiência no mesmo estilo do modelo Ultra Paine: opção express para focar na prova ou extensão completa para viver Lima e os Andes.</p>
+        </div>
+
+        <div class="trip-configurator">
+          <aside class="control-panel" aria-label="Selecionar pacote">
+            <h3>Configurar viagem</h3>
+            <div class="toggle-group primary">
+              <span class="toggle-label">Tipo de pacote</span>
+              <div class="segmented" role="group" aria-label="Tipo de pacote">
+                <button type="button" data-option="type" data-value="city" aria-pressed="true">City Run</button>
+                <button type="button" data-option="type" data-value="legacy" aria-pressed="false">Legacy</button>
+              </div>
+            </div>
+            <div class="toggle-group primary">
+              <span class="toggle-label">Passagem aérea</span>
+              <div class="segmented" role="group" aria-label="Passagem aérea">
+                <button type="button" data-option="air" data-value="without" aria-pressed="true">Sem aéreo</button>
+                <button type="button" data-option="air" data-value="with" aria-pressed="false">Com aéreo</button>
+              </div>
+            </div>
+            <div class="toggle-group filter">
+              <span class="toggle-label">Categoria</span>
+              <div class="segmented three" role="group" aria-label="Categoria de hotel">
+                <button type="button" data-option="category" data-value="turistica" aria-pressed="false">Turística</button>
+                <button type="button" data-option="category" data-value="turisticaSuperior" aria-pressed="false">Superior</button>
+                <button type="button" data-option="category" data-value="primeira" aria-pressed="false">Primeira</button>
+              </div>
+            </div>
+            <div class="toggle-group filter">
+              <span class="toggle-label">Apartamento</span>
+              <div class="segmented three" role="group" aria-label="Tipo de apartamento">
+                <button type="button" data-option="apartment" data-value="single" aria-pressed="false">Single</button>
+                <button type="button" data-option="apartment" data-value="duplo" aria-pressed="false">Duplo</button>
+                <button type="button" data-option="apartment" data-value="triplo" aria-pressed="false">Triplo</button>
+              </div>
+            </div>
+            <div class="toggle-group filter">
+              <span class="toggle-label">Distância</span>
+              <div class="segmented three" role="group" aria-label="Distância da prova">
+                <button type="button" data-option="distance" data-value="10K" aria-pressed="false">10K</button>
+                <button type="button" data-option="distance" data-value="21K" aria-pressed="false">21K</button>
+                <button type="button" data-option="distance" data-value="42K" aria-pressed="false">42K</button>
+              </div>
+            </div>
+            <div class="selection-summary">
+              <strong id="selectionTitle">City Run sem aéreo</strong>
+              <span id="selectionText">4 dias / 3 noites em Lima, com inscrição inclusa.</span>
+            </div>
+          </aside>
+
+          <article class="trip-detail" id="tripDetail" style="--accent: var(--gold); --image: url('media/lima_4d3n.png');">
+            <div class="trip-hero">
+              <div class="trip-title">
+                <div class="tag-row" id="tripTags">
+                  <span class="tag">City Run</span>
+                  <span class="tag">Sem aéreo</span>
+                  <span class="tag">4 dias / 3 noites</span>
+                </div>
+                <h3 id="tripName">Lima City Run</h3>
+                <p id="tripIntro">A viagem direta para chegar, retirar o kit, correr e aproveitar Lima com tempo bem usado.</p>
+              </div>
+            </div>
+
+            <div class="trip-body">
+              <div class="trip-copy">
+                <div class="fact-grid">
+                  <div class="fact"><small>Base</small><strong id="tripBase">Miraflores</strong></div>
+                  <div class="fact"><small>Foco</small><strong id="tripFocus">Prova + cidade</strong></div>
+                  <div class="fact"><small>Distâncias</small><strong>10K, 21K e 42K</strong></div>
+                </div>
+                <h3>O que está incluído</h3>
+                <p id="tripDescription">Uma operação enxuta para atletas e acompanhantes, com hospedagem bem localizada, transfer de chegada, suporte de prova e experiências urbanas em Lima.</p>
+                <div class="included-grid" id="includedList"></div>
+              </div>
+
+              <aside class="commercial-card">
+                <small id="quoteLabel">City Run sem aéreo - 4 dias / 3 noites</small>
+                <p class="rate-line" id="priceQualifier">Entrada de</p>
+                <div class="price"><output id="quoteEntry">Carregando</output></div>
+                <p class="usd-line" id="quoteInstallment">+ 10x s/ juros de --</p>
+                <p class="usd-line" id="quotePix">ou à vista no pix por -- com 8% de desconto.</p>
+                <p class="usd-line" id="quoteUsd">USD por pessoa</p>
+                <p class="rate-line" style="display: none"><strong>Cotação:</strong> <span id="usd-sell">carregando...</span></p>
+                <p class="rate-message" id="quoteNotice">cotação sujeita a conferência real no momento do fechamento</p>
+                <div class="commercial-meta">
+                  <span><b>Aéreo:</b> <span id="airStatus">não incluso</span></span>
+                  <span><b>Inscrição:</b> <span id="distanceStatus">10K, 21K ou 42K inclusa</span></span>
+                  <span><b>Hotéis:</b> <span id="hotelStatus">Turística, Turística Superior ou Primeira</span></span>
+                  <span><b>Grupo:</b> 10 pagantes + 1 FREE terrestre</span>
+                </div>
+              </aside>
+
+              <details class="itinerary">
+                <summary id="roteiro">Roteiro</summary>
+                <ol class="day-list" id="itineraryList"></ol>
+              </details>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="story" aria-label="Experiência no Peru">
+      <div class="wrap">
+        <div class="story-grid">
+          <div class="story-image">
+            <img src="media/lima_8d7n.png" alt="Corredor com camisa Lima 42K celebrando diante de Machu Picchu">
+          </div>
+          <div class="story-copy">
+            <p class="eyebrow">Depois da chegada</p>
+            <h2>Transforme a medalha em viagem</h2>
+            <p>A Lima Marathon pode ser só o começo. Para grupos que querem ir além da prova, a extensão Legacy conecta a capital peruana aos Andes, com tempo para recuperação, gastronomia, cultura e aquela foto que vale o ciclo inteiro de treinos.</p>
+            <div class="highlights">
+              <div class="highlight"><b>Miraflores</b><span>Base prática para restaurantes, orla, retirada de kit e deslocamentos de prova.</span></div>
+              <div class="highlight"><b>Gastronomia</b><span>Ceviche, cafés, mercados e restaurantes que fazem Lima ser destino mesmo sem tênis.</span></div>
+              <div class="highlight"><b>Andes</b><span>Extensão planejada para quem quer unir corrida, altitude e memória histórica.</span></div>
+              <div class="highlight"><b>Grupo</b><span>Roteiro pensado para corredores, acompanhantes e líderes de assessoria.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing" id="contato">
+      <div class="wrap">
+        <div class="closing-card">
+          <div>
+            <p class="eyebrow">Vagas e tarifas sujeitas a disponibilidade</p>
+            <h2>Leve seu grupo para correr Lima</h2>
+            <div class="contact-line">
+              <span>WhatsApp: (11) 91952-3477</span>
+              <span>Pacotes para atletas e acompanhantes</span>
+              <span>Operação SLP Operadora</span>
+            </div>
+          </div>
+          <a class="cta" href="https://wa.me/5511919523477?text=Quero%20reservar%20um%20pacote%20para%20a%20Lima%20Marathon" target="_blank" rel="noreferrer">Solicitar atendimento</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>Lima Marathon - Lima, Peru.</span>
+      <span>Roteiros, valores, hotéis e inscrições devem ser confirmados no momento da reserva.</span>
+    </div>
+  </footer>
+
+  <script src="cambio.js?v=2"></script>
+  <script>
+    const categories = {
+      turistica: "Turística",
+      turisticaSuperior: "Turística Superior",
+      primeira: "Primeira"
+    };
+
+    const apartments = {
+      single: "Single",
+      duplo: "Duplo",
+      triplo: "Triplo"
+    };
+
+    const distances = {
+      "10K": "10K",
+      "21K": "21K",
+      "42K": "42K"
+    };
+
+    const landRates = {
+      city: [
+        { category: "turistica", apartment: "single", "10K": 549, "21K": 549, "42K": 549 },
+        { category: "turistica", apartment: "duplo", "10K": 439, "21K": 439, "42K": 439 },
+        { category: "turistica", apartment: "triplo", "10K": 415, "21K": 415, "42K": 415 },
+        { category: "turisticaSuperior", apartment: "single", "10K": 609, "21K": 609, "42K": 609 },
+        { category: "turisticaSuperior", apartment: "duplo", "10K": 479, "21K": 479, "42K": 479 },
+        { category: "turisticaSuperior", apartment: "triplo", "10K": 449, "21K": 449, "42K": 449 },
+        { category: "primeira", apartment: "single", "10K": 839, "21K": 839, "42K": 839 },
+        { category: "primeira", apartment: "duplo", "10K": 649, "21K": 649, "42K": 649 },
+        { category: "primeira", apartment: "triplo", "10K": 599, "21K": 599, "42K": 599 }
+      ],
+      legacy: [
+        { category: "turistica", apartment: "single", "10K": 2259, "21K": 2259, "42K": 2259 },
+        { category: "turistica", apartment: "duplo", "10K": 1699, "21K": 1699, "42K": 1699 },
+        { category: "turistica", apartment: "triplo", "10K": 1579, "21K": 1579, "42K": 1579 },
+        { category: "turisticaSuperior", apartment: "single", "10K": 2519, "21K": 2519, "42K": 2519 },
+        { category: "turisticaSuperior", apartment: "duplo", "10K": 1889, "21K": 1889, "42K": 1889 },
+        { category: "turisticaSuperior", apartment: "triplo", "10K": 1759, "21K": 1759, "42K": 1759 },
+        { category: "primeira", apartment: "single", "10K": 3029, "21K": 3029, "42K": 3029 },
+        { category: "primeira", apartment: "duplo", "10K": 2269, "21K": 2269, "42K": 2269 },
+        { category: "primeira", apartment: "triplo", "10K": 2109, "21K": 2109, "42K": 2109 }
+      ]
+    };
+
+    const trips = {
+      city: {
+        name: "Lima City Run",
+        shortName: "City Run",
+        accent: "var(--gold)",
+        image: "media/lima_4d3n.png",
+        duration: "4 dias / 3 noites",
+        base: "Miraflores",
+        focus: "Prova + cidade",
+        intro: "A viagem direta para chegar, retirar o kit, correr e aproveitar Lima com tempo bem usado.",
+        description: "Uma operação enxuta para atletas e acompanhantes, com hospedagem bem localizada, transfer de chegada, suporte de prova e experiências urbanas em Lima.",
+        included: [
+          "3 noites de hospedagem em Lima com café da manhã",
+          "Transfer aeroporto / hotel / aeroporto",
+          "Transfer para Expo Maratona e retirada de kit",
+          "City tour panorâmico em Lima",
+          "Transfer no dia da prova para a zona de largada",
+          "Assistência local",
+          "Coordenação operacional do grupo",
+          "Inscrição da prova incluída"
+        ],
+        itinerary: [
+          ["D1", "Chegada a Lima", "Recepção no aeroporto internacional e transfer ao hotel. Restante do dia livre para descanso e adaptação."],
+          ["D2", "Expo Maratona + City Tour", "Saída para retirada do kit oficial e city tour panorâmico em Lima, com retorno ao hotel."],
+          ["D3", "Dia da Maratona", "Transfer programado à zona de largada e operação coordenada conforme programação oficial do evento."],
+          ["D4", "Lima / Aeroporto", "Café da manhã e transfer ao aeroporto. Encerramento dos serviços."]
+        ],
+        without: {
+          label: "City Run sem aéreo - 4 dias / 3 noites",
+          airTag: "Sem aéreo",
+          airStatus: "não incluso",
+          rates: landRates.city
+        },
+        with: {
+          label: "City Run aéreo sob consulta - 4 dias / 3 noites",
+          airTag: "Aéreo sob consulta",
+          airStatus: "não incluso nos valores do PDF; cotar à parte",
+          rates: landRates.city
+        }
+      },
+      legacy: {
+        name: "Lima Legacy",
+        shortName: "Legacy",
+        accent: "var(--sky)",
+        image: "media/lima_8d7n.png",
+        duration: "8 dias / 7 noites",
+        base: "Lima + Cusco",
+        focus: "Prova + Andes",
+        intro: "A versão completa para correr Lima e estender a viagem ao Peru clássico depois da medalha.",
+        description: "Um roteiro mais imersivo, com tempo de prova em Lima e extensão desenhada para conectar recuperação, cultura, Andes e experiências de alto impacto visual.",
+        included: [
+          "3 noites de hospedagem em Lima com café da manhã",
+          "4 noites de hospedagem em Cusco com café da manhã",
+          "Transfers em Lima e Cusco conforme roteiro",
+          "City tour em Lima e Cusco",
+          "Vale Sagrado Full Day com ingressos e almoço",
+          "Machu Picchu Full Day com trem, ônibus, ingresso, guia e almoço",
+          "Assistência local SLP Operadora",
+          "Inscrição da prova incluída"
+        ],
+        itinerary: [
+          ["D1", "Chegada a Lima", "Recepção no Aeroporto Internacional Jorge Chávez e transfer privativo ao hotel em Lima."],
+          ["D2", "Expo Maratona + City Tour", "Retirada do kit oficial e city tour por Lima, incluindo Miraflores, Larco Mar e Centro Histórico."],
+          ["D3", "Lima Marathon", "Transfer à zona de largada, participação na prova e restante do dia livre para descanso."],
+          ["D4", "Lima para Cusco", "Transfer ao aeroporto, voo doméstico cotado à parte e chegada a Cusco para aclimatação."],
+          ["D5", "City Tour em Cusco", "Visita aos principais pontos históricos e culturais de Cusco e arredores."],
+          ["D6", "Vale Sagrado", "Excursão de dia inteiro ao Vale Sagrado, com ingressos e almoço incluídos."],
+          ["D7", "Machu Picchu", "Full Day Machu Picchu com traslados, trem turístico, ônibus, ingresso, visita guiada e almoço."],
+          ["D8", "Retorno", "Transfer ao Aeroporto Internacional Alejandro Velasco Astete e encerramento dos serviços SLP."]
+        ],
+        without: {
+          label: "Legacy sem aéreo - 8 dias / 7 noites",
+          airTag: "Sem aéreo",
+          airStatus: "internacional e interno não inclusos",
+          rates: landRates.legacy
+        },
+        with: {
+          label: "Legacy aéreo sob consulta - 8 dias / 7 noites",
+          airTag: "Aéreo sob consulta",
+          airStatus: "internacional e interno não inclusos nos valores do PDF; cotar à parte",
+          rates: landRates.legacy
+        }
+      }
+    };
+
+    const state = { type: "city", air: "without", category: null, apartment: null, distance: null };
+    let exchangeStatus = "loading";
+    let exchangeData = null;
+
+    const tripDetail = document.querySelector("#tripDetail");
+    const tripTags = document.querySelector("#tripTags");
+    const tripName = document.querySelector("#tripName");
+    const tripIntro = document.querySelector("#tripIntro");
+    const tripBase = document.querySelector("#tripBase");
+    const tripFocus = document.querySelector("#tripFocus");
+    const tripDescription = document.querySelector("#tripDescription");
+    const includedList = document.querySelector("#includedList");
+    const itineraryList = document.querySelector("#itineraryList");
+    const selectionTitle = document.querySelector("#selectionTitle");
+    const selectionText = document.querySelector("#selectionText");
+    const airStatus = document.querySelector("#airStatus");
+    const distanceStatus = document.querySelector("#distanceStatus");
+    const hotelStatus = document.querySelector("#hotelStatus");
+    const label = document.querySelector("#quoteLabel");
+    const entry = document.querySelector("#quoteEntry");
+    const priceQualifier = document.querySelector("#priceQualifier");
+    const quoteInstallment = document.querySelector("#quoteInstallment");
+    const quotePix = document.querySelector("#quotePix");
+    const quoteUsd = document.querySelector("#quoteUsd");
+    const quoteNotice = document.querySelector("#quoteNotice");
+    const usdSell = document.querySelector("#usd-sell");
+
+    function formatBRL(value) {
+      return Math.ceil(value).toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+    }
+
+    function formatUSD(value) {
+      return `USD ${value.toLocaleString("en-US", { maximumFractionDigits: 0 })}`;
+    }
+
+    function priceParts(total) {
+      const totalRounded = Math.ceil(total);
+      const entrada = Math.ceil(totalRounded * 0.14);
+      const installment = Math.ceil((totalRounded - entrada) / 10);
+      const pix = Math.ceil(totalRounded * 0.92);
+      return { total: totalRounded, entrada, installment, pix };
+    }
+
+    function selectedRateRows(offer) {
+      return offer.rates.filter((row) =>
+        (!state.category || row.category === state.category) &&
+        (!state.apartment || row.apartment === state.apartment)
+      );
+    }
+
+    function currentPrice(offer) {
+      const rows = selectedRateRows(offer);
+      const distanceKeys = state.distance ? [state.distance] : Object.keys(distances);
+      const candidates = rows.flatMap((row) =>
+        distanceKeys.map((distance) => ({
+          usd: row[distance],
+          category: row.category,
+          apartment: row.apartment,
+          distance
+        }))
+      );
+
+      return candidates.reduce((lowest, candidate) => !lowest || candidate.usd < lowest.usd ? candidate : lowest, null);
+    }
+
+    function hasFullPriceSelection() {
+      return Boolean(state.category && state.apartment && state.distance);
+    }
+
+    function renderOffer() {
+      const trip = trips[state.type];
+      const offer = trip[state.air];
+      const price = currentPrice(offer);
+      const exactSelection = hasFullPriceSelection();
+      tripDetail.style.setProperty("--accent", trip.accent);
+      tripDetail.style.setProperty("--image", `url('${trip.image}')`);
+      const dynamicTags = [
+        trip.shortName,
+        offer.airTag,
+        trip.duration,
+        state.category ? categories[state.category] : null,
+        state.apartment ? apartments[state.apartment] : null,
+        state.distance || null
+      ].filter(Boolean);
+      tripTags.innerHTML = dynamicTags.map((tag) => `<span class="tag">${tag}</span>`).join("");
+      tripName.textContent = trip.name;
+      tripIntro.textContent = trip.intro;
+      tripBase.textContent = trip.base;
+      tripFocus.textContent = trip.focus;
+      tripDescription.textContent = trip.description;
+      includedList.innerHTML = trip.included.map((item) => `<span>${item}</span>`).join("");
+      itineraryList.innerHTML = trip.itinerary
+        .map(([date, title, text]) => `<li><time>${date}</time><span><b>${title}</b>${text}</span></li>`)
+        .join("");
+      selectionTitle.textContent = `${trip.shortName} ${offer.airTag.toLowerCase()}`;
+      selectionText.textContent = exactSelection
+        ? `${categories[state.category]} - ${apartments[state.apartment]} - ${state.distance}, projeção preliminar 2027.`
+        : `${trip.duration}. Escolha categoria, apartamento e distância para ver o valor exato.`;
+      airStatus.textContent = offer.airStatus;
+      distanceStatus.textContent = state.distance ? `${state.distance} inclusa` : "10K, 21K ou 42K inclusa";
+      hotelStatus.textContent = state.category ? categories[state.category] : "Turística, Turística Superior ou Primeira";
+      label.textContent = offer.label;
+
+      if (price && exchangeStatus === "ready" && exchangeData) {
+        const parts = priceParts(price.usd * exchangeData.rate);
+        entry.textContent = formatBRL(parts.entrada);
+        priceQualifier.textContent = exactSelection ? "Entrada de" : "Entrada a partir de";
+        quoteInstallment.textContent = `+ 10x s/ juros de ${formatBRL(parts.installment)}`;
+        quotePix.textContent = `ou à vista no pix por ${formatBRL(parts.pix)} com 8% de desconto.`;
+        quoteUsd.textContent = `${formatUSD(price.usd)} por pessoa`;
+        usdSell.textContent = `${exchangeData.rate.toFixed(4)} (${exchangeData.date}${exchangeData.source ? `, ${exchangeData.source}` : ""})`;
+        quoteNotice.textContent = "cotação sujeita a conferência real no momento do fechamento";
+        quoteNotice.classList.remove("error");
+      } else if (price && exchangeStatus === "error") {
+        const parts = priceParts(price.usd);
+        entry.textContent = formatUSD(parts.entrada);
+        priceQualifier.textContent = exactSelection ? "Entrada de" : "Entrada a partir de";
+        quoteInstallment.textContent = `+ 10x s/ juros de ${formatUSD(parts.installment)}`;
+        quotePix.textContent = `ou à vista no pix por ${formatUSD(parts.pix)} com 8% de desconto.`;
+        quoteUsd.textContent = `${formatUSD(price.usd)} por pessoa`;
+        usdSell.textContent = "indisponível";
+        quoteNotice.textContent = "erro ao carregar cotação em reais, solicite cotação real por WhatsApp";
+        quoteNotice.classList.add("error");
+      } else {
+        entry.textContent = "Carregando";
+        priceQualifier.textContent = exactSelection ? "Entrada de" : "Entrada a partir de";
+        quoteInstallment.textContent = "+ 10x s/ juros de --";
+        quotePix.textContent = "ou à vista no pix por -- com 8% de desconto.";
+        quoteUsd.textContent = price ? `${formatUSD(price.usd)} por pessoa` : "USD por pessoa";
+        usdSell.textContent = "carregando...";
+        quoteNotice.textContent = "cotação sujeita a conferência real no momento do fechamento";
+        quoteNotice.classList.remove("error");
+      }
+
+      document.querySelectorAll("[data-option]").forEach((button) => {
+        button.setAttribute("aria-pressed", String(state[button.dataset.option] === button.dataset.value));
+      });
+    }
+
+    document.querySelectorAll("[data-option]").forEach((button) => {
+      button.addEventListener("click", () => {
+        state[button.dataset.option] = button.dataset.value;
+        renderOffer();
+      });
+    });
+
+    function exchangeRateTimeout() {
+      return new Promise((resolve) => {
+        window.setTimeout(() => resolve(null), 8000);
+      });
+    }
+
+    if (window.ultraPaineExchangeRatePromise) {
+      Promise.race([window.ultraPaineExchangeRatePromise, exchangeRateTimeout()])
+        .then((result) => {
+          exchangeData = result;
+          exchangeStatus = result ? "ready" : "error";
+          renderOffer();
+        })
+        .catch(() => {
+          exchangeData = null;
+          exchangeStatus = "error";
+          renderOffer();
+        });
+    } else {
+      exchangeStatus = "error";
+    }
+
+    renderOffer();
+
+    // Select the navigation link and the details element
+    const roteiroLink = document.getElementById('roteiro-link');
+    const itineraryDetails = document.querySelector('.itinerary');
+
+    // Listen for the click on the nav link
+    roteiroLink.addEventListener('click', () => {
+      // Force the <details> element to open
+      itineraryDetails.open = true;
+    });
+
+  </script>
+</body>
+</html>
