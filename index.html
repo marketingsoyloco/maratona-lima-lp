@@ -162,6 +162,13 @@
       color: rgba(255,255,255,.84);
     }
 
+    .whatsapp-icon {
+      display: none;
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+
     .cta,
     .ghost {
       display: inline-flex;
@@ -258,13 +265,20 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       border: 1px solid var(--line);
-      background: rgba(7, 16, 15, .94);
+      background: rgba(9, 21, 27, .92);
       box-shadow: var(--shadow);
       border-radius: var(--radius);
       overflow: hidden;
+      align-items: center;
+      justify-content: center; /* Horizontal alignment */
+
     }
 
     .proof {
+      display: grid;
+      align-content: center;
+      justify-content: center;
+      text-align: left;
       padding: 22px;
       border-right: 1px solid var(--line);
     }
@@ -273,18 +287,20 @@
 
     .proof b {
       display: block;
-      font-size: clamp(1.28rem, 2.4vw, 2.08rem);
+      font-size: clamp(1.35rem, 2.5vw, 2rem);
       line-height: 1;
-      color: var(--ink);
+    }
+
+    .proof.compact b {
+      font-size: clamp(1.2rem, 2vw, 1.7rem);
     }
 
     .proof span {
-      display: block;
-      margin-top: 7px;
       color: var(--muted);
-      font-size: .82rem;
+      font-size: .88rem;
       text-transform: uppercase;
-      font-weight: 850;
+      letter-spacing: 0;
+      font-weight: 800;
     }
 
     section {
@@ -862,7 +878,81 @@
     }
 
     @media (max-width: 920px) {
-      .nav-links { display: none; }
+      .nav {
+        left: 50%;
+        top: 14px;
+        right: auto;
+        width: min(720px, calc(100% - 32px));
+        transform: translateX(-50%);
+        grid-template-columns: minmax(0, 1fr) 48px;
+        grid-template-areas:
+          "brand brand"
+          "links cta";
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        padding: 12px;
+        padding-top: 12px;
+      }
+
+      .hero-inner {
+        padding-top: 142px;
+      }
+
+      .brand {
+        grid-area: brand;
+        display: inline-flex;
+        justify-self: center;
+        justify-content: center;
+        align-items: center;
+        min-width: 0;
+        gap: 10px;
+      }
+
+      .race-lockup {
+        gap: 10px;
+        flex: 0 0 auto;
+      }
+
+      .brand-logo {
+        width: 128px;
+        flex: 0 1 auto;
+      }
+
+      .nav-links {
+        grid-area: links;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px;
+        width: 100%;
+        font-size: .78rem;
+      }
+
+      .nav-links a {
+        min-height: 36px;
+        display: grid;
+        place-items: center;
+        padding: 0 8px;
+        border: 1px solid rgba(255,255,255,.09);
+        border-radius: 999px;
+        background: rgba(255,255,255,.045);
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .nav > .cta {
+        grid-area: cta;
+        justify-self: end;
+        width: 48px;
+        min-height: 48px;
+        height: 48px;
+        padding: 0;
+        border-radius: 50%;
+      }
+
+      .nav > .cta .cta-label { display: none; }
+      .nav > .cta .whatsapp-icon { display: block; }
 
       .proof-strip,
       .routes,
@@ -896,20 +986,43 @@
       }
 
       .nav {
-        padding: 16px 18px;
+        top: 18px;
+        width: min(100% - 24px, 390px);
+        gap: 16px;
+        padding: 10px;
+      }
+
+      .hero-inner {
+        padding-top: 166px;
       }
 
       .brand-mark {
-        width: 38px;
-        height: 38px;
+        width: 36px;
+        height: 36px;
       }
 
       .brand-text {
-        font-size: .86rem;
+        font-size: .84rem;
       }
 
-      .nav .cta {
-        display: none;
+      .brand-logo {
+        width: 112px;
+        height: 34px;
+      }
+
+      .nav-links {
+        font-size: .7rem;
+      }
+
+      .nav-links a {
+        min-height: 34px;
+        padding: 0 5px;
+      }
+
+      .nav > .cta {
+        width: 44px;
+        min-height: 44px;
+        height: 44px;
       }
 
       h1 {
@@ -982,7 +1095,12 @@
           <a id="roteiro-link" href="#roteiro">Roteiro</a>
           <a href="#contato">Contato</a>
         </div>
-        <a class="cta" href="https://wa.me/5511919523477?text=Quero%20saber%20mais%20sobre%20os%20pacotes%20Maratona%20de%20Lima" target="_blank" rel="noreferrer">Falar no WhatsApp</a>
+        <a class="cta" href="https://wa.me/5511919523477?text=Quero%20saber%20mais%20sobre%20os%20pacotes%20Maratona%20de%20Lima" target="_blank" rel="noreferrer" aria-label="Falar no WhatsApp">
+          <span class="cta-label">Falar no WhatsApp</span>
+          <svg class="whatsapp-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M16.01 3.2c-7.06 0-12.8 5.63-12.8 12.56 0 2.39.69 4.69 1.99 6.68L3.1 28.8l6.62-2.03a13.03 13.03 0 0 0 6.29 1.6c7.06 0 12.8-5.63 12.8-12.56S23.07 3.2 16.01 3.2Zm0 22.99c-2.05 0-4.04-.58-5.76-1.68l-.41-.26-3.87 1.19 1.24-3.75-.27-.43a10.18 10.18 0 0 1-1.57-5.5c0-5.72 4.78-10.38 10.65-10.38 5.86 0 10.64 4.66 10.64 10.38S21.87 26.19 16.01 26.19Zm5.84-7.78c-.32-.16-1.89-.92-2.18-1.02-.29-.11-.5-.16-.72.16-.21.31-.82 1.02-1.01 1.23-.19.21-.37.24-.69.08-.32-.16-1.35-.49-2.57-1.56-.95-.83-1.59-1.86-1.78-2.18-.19-.31-.02-.48.14-.64.15-.14.32-.37.48-.55.16-.18.21-.31.32-.52.11-.21.05-.39-.03-.55-.08-.16-.72-1.7-.98-2.33-.26-.61-.52-.53-.72-.54l-.61-.01c-.21 0-.55.08-.84.39-.29.31-1.1 1.05-1.1 2.57 0 1.52 1.13 2.98 1.29 3.19.16.21 2.23 3.34 5.4 4.68.75.32 1.34.51 1.8.65.76.24 1.45.2 1.99.12.61-.09 1.89-.76 2.16-1.49.27-.73.27-1.36.19-1.49-.08-.13-.29-.21-.61-.37Z"/>
+          </svg>
+        </a>
       </nav>
 
       <div class="hero-inner">
@@ -997,8 +1115,8 @@
     </header>
 
     <div class="proof-strip" aria-label="Resumo da experiência">
-      <div class="proof"><b>10K 21K 42K</b><span>Distâncias da prova</span></div>
-      <div class="proof"><b>4D/3N ou 8D/7N</b><span>Viagens curta e estendida</span></div>
+      <div class="proof"><b>10K, 21K, 42K</b><span>Distâncias da prova</span></div>
+      <div class="proof compact"><b>4D/3N ou 8D/7N</b><span>Viagens curta e estendida</span></div>
       <div class="proof"><b>Costa Verde</b><span>Rota com vista para o Pacífico</span></div>
       <div class="proof"><b>Lima + Andes</b><span>Extensão opcional ao Peru clássico</span></div>
     </div>
