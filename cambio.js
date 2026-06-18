@@ -1,3 +1,6 @@
+/*
+Live exchange-rate lookup disabled in favor of a fixed commercial rate.
+
 const baseUrl = "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata";
 const cacheKey = "ultraPaineExchangeRate";
 const cacheMaxAgeMs = 12 * 60 * 60 * 1000;
@@ -108,3 +111,12 @@ async function displayLatestRate() {
 }
 
 window.ultraPaineExchangeRatePromise = displayLatestRate();
+*/
+
+const fixedExchangeRate = {
+  rate: 5.40,
+  source: "Cotação fixa"
+};
+
+window.ultraPaineExchangeRate = fixedExchangeRate;
+window.ultraPaineExchangeRatePromise = Promise.resolve(fixedExchangeRate);
