@@ -674,7 +674,9 @@
     }
 
     .rate-message {
-      color: #dff7ff;
+      color: #dedede;
+      font-weight: 600;
+      font-size: .72rem;
     }
 
     .rate-message.error {
@@ -1035,6 +1037,12 @@
         height: 44px;
       }
 
+      .package-options button {
+        padding: 0 3px;
+        font-size: .72rem;
+        white-space: nowrap;
+      }
+
       h1 {
         font-size: clamp(2.72rem, 13vw, 3.7rem);
       }
@@ -1161,7 +1169,7 @@
       <div class="wrap">
         <div class="section-head">
           <h2>Pacotes</h2>
-          <p>Monte a experiência no mesmo estilo do modelo Ultra Paine: opção express para focar na prova ou extensão completa para viver Lima e os Andes.</p>
+          <p>Escolha entre EXPRESS, EXPRESS+ e EXPERIENCE: da viagem objetiva para a prova à extensão completa por Lima, Cusco e Machu Picchu.</p>
         </div>
 
         <div class="trip-configurator">
@@ -1169,9 +1177,10 @@
             <h3>Configurar viagem</h3>
             <div class="toggle-group primary">
               <span class="toggle-label">Tipo de pacote</span>
-              <div class="segmented" role="group" aria-label="Tipo de pacote">
-                <button type="button" data-option="type" data-value="city" aria-pressed="true">City Run</button>
-                <button type="button" data-option="type" data-value="legacy" aria-pressed="false">Legacy</button>
+              <div class="segmented three package-options" role="group" aria-label="Tipo de pacote">
+                <button type="button" data-option="type" data-value="express" aria-pressed="true">EXPRESS</button>
+                <button type="button" data-option="type" data-value="expressPlus" aria-pressed="false">EXPRESS+</button>
+                <button type="button" data-option="type" data-value="experience" aria-pressed="false">EXPERIENCE</button>
               </div>
             </div>
             <div class="toggle-group primary">
@@ -1206,7 +1215,7 @@
               </div>
             </div>
             <div class="selection-summary">
-              <strong id="selectionTitle">City Run sem aéreo</strong>
+              <strong id="selectionTitle">EXPRESS sem aéreo</strong>
               <span id="selectionText">4 dias / 3 noites em Lima, com inscrição inclusa.</span>
             </div>
           </aside>
@@ -1215,11 +1224,11 @@
             <div class="trip-hero">
               <div class="trip-title">
                 <div class="tag-row" id="tripTags">
-                  <span class="tag">City Run</span>
+                  <span class="tag">EXPRESS</span>
                   <span class="tag">Sem aéreo</span>
                   <span class="tag">4 dias / 3 noites</span>
                 </div>
-                <h3 id="tripName">Lima City Run</h3>
+                <h3 id="tripName">Maratona de Lima EXPRESS</h3>
                 <p id="tripIntro">A viagem direta para chegar, retirar o kit, correr e aproveitar Lima com tempo bem usado.</p>
               </div>
             </div>
@@ -1237,14 +1246,15 @@
               </div>
 
               <aside class="commercial-card">
-                <small id="quoteLabel">City Run sem aéreo - 4 dias / 3 noites</small>
+                <small id="quoteLabel">EXPRESS sem aéreo - 4 dias / 3 noites</small>
                 <p class="rate-line" id="priceQualifier">Entrada de</p>
                 <div class="price"><output id="quoteEntry">Carregando</output></div>
                 <p class="usd-line" id="quoteInstallment">+ 10x s/ juros de --</p>
                 <p class="usd-line" id="quotePix">ou à vista no pix por -- com 8% de desconto.</p>
+                <p class="usd-line" id="quoteTotal">Total em reais: --</p>
                 <p class="usd-line" id="quoteUsd" >USD por pessoa</p>
-                <p class="rate-line" style="display: none;"><strong>Cotação:</strong> <span id="usd-sell">R$ 5,40/USD</span></p>
-                <p class="rate-message" id="quoteNotice" style="display: none;">valores calculados com cotação fixa de R$ 5,40 por dólar</p>
+                <p class="rate-message" id="quoteNotice">*Preço em reais estimado. Cotação final será confirmada no momento da reserva.</p>
+
                 <div class="commercial-meta">
                   <span><b>Aéreo:</b> <span id="airStatus">não incluso</span></span>
                   <span><b>Inscrição:</b> <span id="distanceStatus">10K, 21K ou 42K inclusa</span></span>
@@ -1272,7 +1282,7 @@
           <div class="story-copy">
             <p class="eyebrow">Depois da chegada</p>
             <h2>Transforme a medalha em viagem</h2>
-            <p>A Maratona de Lima pode ser só o começo. Para grupos que querem ir além da prova, a extensão Legacy conecta a capital peruana aos Andes, com tempo para recuperação, gastronomia, cultura e aquela foto que vale o ciclo inteiro de treinos.</p>
+            <p>A Maratona de Lima pode ser só o começo. O pacote EXPERIENCE conecta a capital peruana aos Andes, com tempo para recuperação, gastronomia, cultura e aquela foto que vale o ciclo inteiro de treinos.</p>
             <div class="highlights">
               <div class="highlight"><b>Miraflores</b><span>Base prática para restaurantes, orla, retirada de kit e deslocamentos de prova.</span></div>
               <div class="highlight"><b>Gastronomia</b><span>Ceviche, cafés, mercados e restaurantes que fazem Lima ser destino mesmo sem tênis.</span></div>
@@ -1330,18 +1340,29 @@
     };
 
     const landRates = {
-      city: [
-        { category: "turistica", apartment: "single", "10K": 549, "21K": 549, "42K": 549 },
-        { category: "turistica", apartment: "duplo", "10K": 439, "21K": 439, "42K": 439 },
-        { category: "turistica", apartment: "triplo", "10K": 415, "21K": 415, "42K": 415 },
-        { category: "turisticaSuperior", apartment: "single", "10K": 609, "21K": 609, "42K": 609 },
-        { category: "turisticaSuperior", apartment: "duplo", "10K": 479, "21K": 479, "42K": 479 },
-        { category: "turisticaSuperior", apartment: "triplo", "10K": 449, "21K": 449, "42K": 449 },
-        { category: "primeira", apartment: "single", "10K": 839, "21K": 839, "42K": 839 },
-        { category: "primeira", apartment: "duplo", "10K": 649, "21K": 649, "42K": 649 },
-        { category: "primeira", apartment: "triplo", "10K": 599, "21K": 599, "42K": 599 }
+      express: [
+        { category: "turistica", apartment: "single", "10K": 595, "21K": 595, "42K": 595 },
+        { category: "turistica", apartment: "duplo", "10K": 475, "21K": 475, "42K": 475 },
+        { category: "turistica", apartment: "triplo", "10K": 449, "21K": 449, "42K": 449 },
+        { category: "turisticaSuperior", apartment: "single", "10K": 665, "21K": 665, "42K": 665 },
+        { category: "turisticaSuperior", apartment: "duplo", "10K": 525, "21K": 525, "42K": 525 },
+        { category: "turisticaSuperior", apartment: "triplo", "10K": 495, "21K": 495, "42K": 495 },
+        { category: "primeira", apartment: "single", "10K": 895, "21K": 895, "42K": 895 },
+        { category: "primeira", apartment: "duplo", "10K": 695, "21K": 695, "42K": 695 },
+        { category: "primeira", apartment: "triplo", "10K": 645, "21K": 645, "42K": 645 }
       ],
-      legacy: [
+      expressPlus: [
+        { category: "turistica", apartment: "single", "10K": 675, "21K": 675, "42K": 675 },
+        { category: "turistica", apartment: "duplo", "10K": 525, "21K": 525, "42K": 525 },
+        { category: "turistica", apartment: "triplo", "10K": 495, "21K": 495, "42K": 495 },
+        { category: "turisticaSuperior", apartment: "single", "10K": 755, "21K": 755, "42K": 755 },
+        { category: "turisticaSuperior", apartment: "duplo", "10K": 585, "21K": 585, "42K": 585 },
+        { category: "turisticaSuperior", apartment: "triplo", "10K": 545, "21K": 545, "42K": 545 },
+        { category: "primeira", apartment: "single", "10K": 1025, "21K": 1025, "42K": 1025 },
+        { category: "primeira", apartment: "duplo", "10K": 775, "21K": 775, "42K": 775 },
+        { category: "primeira", apartment: "triplo", "10K": 715, "21K": 715, "42K": 715 }
+      ],
+      experience: [
         { category: "turistica", apartment: "single", "10K": 2259, "21K": 2259, "42K": 2259 },
         { category: "turistica", apartment: "duplo", "10K": 1699, "21K": 1699, "42K": 1699 },
         { category: "turistica", apartment: "triplo", "10K": 1579, "21K": 1579, "42K": 1579 },
@@ -1355,9 +1376,9 @@
     };
 
     const trips = {
-      city: {
-        name: "Lima City Run",
-        shortName: "City Run",
+      express: {
+        name: "Maratona de Lima EXPRESS",
+        shortName: "EXPRESS",
         accent: "var(--gold)",
         image: "media/lima_4d3n.png",
         duration: "4 dias / 3 noites",
@@ -1382,21 +1403,61 @@
           ["D4", "Lima / Aeroporto", "Café da manhã e transfer ao aeroporto. Encerramento dos serviços."]
         ],
         without: {
-          label: "City Run sem aéreo - 4 dias / 3 noites",
+          label: "EXPRESS sem aéreo - 4 dias / 3 noites",
           airTag: "Sem aéreo",
           airStatus: "não incluso",
-          rates: landRates.city
+          rates: landRates.express
         },
         with: {
-          label: "City Run aéreo sob consulta - 4 dias / 3 noites",
+          label: "EXPRESS aéreo sob consulta - 4 dias / 3 noites",
           airTag: "Aéreo sob consulta",
-          airStatus: "não incluso nos valores do PDF; cotar à parte",
-          rates: landRates.city
+          airStatus: "cotar à parte",
+          rates: landRates.express
         }
       },
-      legacy: {
-        name: "Maratona de Lima Legacy",
-        shortName: "Legacy",
+      expressPlus: {
+        name: "Maratona de Lima EXPRESS+",
+        shortName: "EXPRESS+",
+        accent: "var(--lime)",
+        image: "media/lima_4d3n.png",
+        duration: "5 dias / 4 noites",
+        base: "Miraflores",
+        focus: "Prova + dia livre",
+        intro: "Um dia extra em Lima para descansar, se preparar e aproveitar a cidade antes da Expo e da prova.",
+        description: "A versão estendida do EXPRESS acrescenta uma noite e um dia livre em Lima, mantendo a logística de Expo, city tour, largada e assistência local.",
+        included: [
+          "4 noites de hospedagem em Lima com café da manhã",
+          "Transfer aeroporto / hotel / aeroporto",
+          "Dia livre em Lima para descanso e preparação",
+          "Transfer para Expo Maratona e retirada de kit",
+          "City tour panorâmico em Lima",
+          "Transfer no dia da prova para a zona de largada",
+          "Assistência local e coordenação operacional",
+          "Inscrição da prova como projeção operacional"
+        ],
+        itinerary: [
+          ["D1", "Chegada a Lima", "Recepção no Aeroporto Internacional Jorge Chávez e transfer ao hotel em Miraflores. Restante do dia livre."],
+          ["D2", "Dia livre em Lima", "Dia para descanso, aclimatação, passeios opcionais, compras ou preparação para a prova."],
+          ["D3", "Expo Maratona + City Tour", "Retirada do kit oficial e city tour panorâmico por Miraflores, Centro Histórico e pontos emblemáticos."],
+          ["D4", "Dia da Maratona", "Transfer coordenado à zona de largada e assistência local conforme a programação oficial do evento."],
+          ["D5", "Lima / Aeroporto", "Café da manhã e transfer ao Aeroporto Jorge Chávez. Encerramento dos serviços terrestres."]
+        ],
+        without: {
+          label: "EXPRESS+ sem aéreo - 5 dias / 4 noites",
+          airTag: "Sem aéreo",
+          airStatus: "não incluso",
+          rates: landRates.expressPlus
+        },
+        with: {
+          label: "EXPRESS+ aéreo sob consulta - 5 dias / 4 noites",
+          airTag: "Aéreo sob consulta",
+          airStatus: "não incluso nos valores do PDF; cotar à parte",
+          rates: landRates.expressPlus
+        }
+      },
+      experience: {
+        name: "Maratona de Lima EXPERIENCE",
+        shortName: "EXPERIENCE",
         accent: "var(--sky)",
         image: "media/lima_8d7n.png",
         duration: "8 dias / 7 noites",
@@ -1425,21 +1486,21 @@
           ["D8", "Retorno", "Transfer ao Aeroporto Internacional Alejandro Velasco Astete e encerramento dos serviços SLP."]
         ],
         without: {
-          label: "Legacy sem aéreo - 8 dias / 7 noites",
+          label: "EXPERIENCE sem aéreo - 8 dias / 7 noites",
           airTag: "Sem aéreo",
           airStatus: "internacional e interno não inclusos",
-          rates: landRates.legacy
+          rates: landRates.experience
         },
         with: {
-          label: "Legacy aéreo sob consulta - 8 dias / 7 noites",
+          label: "EXPERIENCE aéreo sob consulta - 8 dias / 7 noites",
           airTag: "Aéreo sob consulta",
           airStatus: "internacional e interno não inclusos nos valores do PDF; cotar à parte",
-          rates: landRates.legacy
+          rates: landRates.experience
         }
       }
     };
 
-    const state = { type: "city", air: "without", category: null, apartment: null, distance: null };
+    const state = { type: "express", air: "without", category: null, apartment: null, distance: null };
     let exchangeStatus = "ready";
     let exchangeData = { rate: 5.40, source: "Cotação fixa" };
 
@@ -1462,12 +1523,17 @@
     const priceQualifier = document.querySelector("#priceQualifier");
     const quoteInstallment = document.querySelector("#quoteInstallment");
     const quotePix = document.querySelector("#quotePix");
+    const quoteTotal = document.querySelector("#quoteTotal");
     const quoteUsd = document.querySelector("#quoteUsd");
     const quoteNotice = document.querySelector("#quoteNotice");
-    const usdSell = document.querySelector("#usd-sell");
 
     function formatBRL(value) {
-      return Math.ceil(value).toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+      return value.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
     }
 
     function formatUSD(value) {
@@ -1475,10 +1541,11 @@
     }
 
     function priceParts(total) {
-      const totalRounded = Math.ceil(total);
-      const entrada = Math.ceil(totalRounded * 0.14);
-      const installment = Math.ceil((totalRounded - entrada) / 10);
-      const pix = Math.ceil(totalRounded * 0.92);
+      const roundCurrency = (value) => Math.round((value + Number.EPSILON) * 100) / 100;
+      const totalRounded = roundCurrency(total);
+      const installment = roundCurrency(totalRounded * 0.086);
+      const entrada = roundCurrency(totalRounded - installment * 10);
+      const pix = roundCurrency(totalRounded * 0.92);
       return { total: totalRounded, entrada, installment, pix };
     }
 
@@ -1548,9 +1615,9 @@
         priceQualifier.textContent = exactSelection ? "Entrada de" : "Entrada a partir de";
         quoteInstallment.innerHTML = `+ <strong style="color: white;">10x</strong> s/ juros de <strong style="color: white;">${formatBRL(parts.installment)}</strong>`;
         quotePix.innerHTML = `ou <strong style="color: white;">à vista no pix</strong> por <strong style="color: white;">${formatBRL(parts.pix)}</strong> com 8% de desconto.`;
+        quoteTotal.innerHTML = `Total em reais: <strong style="color: white;">${formatBRL(parts.total)}</strong>`;
         quoteUsd.innerHTML = `<strong style="color: white;">${formatUSD(price.usd)}</strong> por pessoa`;
-        usdSell.textContent = "R$ 5,40/USD";
-        quoteNotice.textContent = "valores calculados com cotação fixa de R$ 5,40 por dólar";
+        quoteNotice.textContent = "*Preço em reais estimado. Cotação final será confirmada no momento da reserva.";
         quoteNotice.classList.remove("error");
       } else if (price && exchangeStatus === "error") {
         const parts = priceParts(price.usd);
@@ -1558,8 +1625,8 @@
         priceQualifier.textContent = exactSelection ? "Entrada de" : "Entrada a partir de";
         quoteInstallment.textContent = `+ 10x s/ juros de ${formatUSD(parts.installment)}`;
         quotePix.textContent = `ou à vista no pix por ${formatUSD(parts.pix)} com 8% de desconto.`;
+        quoteTotal.textContent = "Total em reais indisponível";
         quoteUsd.textContent = `${formatUSD(price.usd)} por pessoa`;
-        usdSell.textContent = "indisponível";
         quoteNotice.textContent = "erro ao carregar cotação em reais, solicite cotação real por WhatsApp";
         quoteNotice.classList.add("error");
       } else {
@@ -1567,9 +1634,9 @@
         priceQualifier.textContent = exactSelection ? "Entrada de" : "Entrada a partir de";
         quoteInstallment.textContent = "+ 10x s/ juros de --";
         quotePix.textContent = "ou à vista no pix por -- com 8% de desconto.";
+        quoteTotal.textContent = "Total em reais: --";
         quoteUsd.textContent = price ? `${formatUSD(price.usd)} por pessoa` : "USD por pessoa";
-        usdSell.textContent = "carregando...";
-        quoteNotice.textContent = "Cotação em estimativa em reais sujeita conferência real no momento do fechamento";
+        quoteNotice.textContent = "carregando cotação...";
         quoteNotice.classList.remove("error");
       }
 
