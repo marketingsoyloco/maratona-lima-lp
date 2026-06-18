@@ -275,9 +275,8 @@
     }
 
     .proof {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: grid;
+      align-content: center;
       justify-content: center;
       text-align: left;
       padding: 22px;
@@ -288,20 +287,15 @@
 
     .proof b {
       display: block;
-      width: max-content;
-      max-width: 100%;
       font-size: clamp(1.35rem, 2.5vw, 2rem);
       line-height: 1;
     }
 
     .proof.compact b {
-      font-size: clamp(1.2rem, 2vw, 1.7rem);
+      font-size: clamp(1.16rem, 2vw, 1.58rem);
     }
 
     .proof span {
-      display: block;
-      width: max-content;
-      max-width: 100%;
       color: var(--muted);
       font-size: .88rem;
       text-transform: uppercase;
